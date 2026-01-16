@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سمارت كراج - الحلول المتكاملة للسيارات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #ffa500;
+            --secondary: #b21f1f;
+            --accent: #FFA500;
+            --dark: #0f1426;
+            --light: #f8f9fa;
+            --orange-light: #ffd699;
+            --orange-dark: #cc8400;
+            --orange-medium: #ff9900;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--orange-light), var(--orange-medium), var(--orange-dark));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* الهيدر */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            background: rgba(15, 20, 38, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.6));
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        .logo-text h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: rgba(255, 165, 0, 0.1);
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255, 165, 0, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* شريط التمرير */
+        .slider-section {
+            margin-bottom: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            height: 400px;
+            position: relative;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(15, 20, 38, 0.9), transparent);
+            padding: 30px;
+            color: white;
+        }
+        
+        .slide-content h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+        
+        /* قسم الخدمات الرئيسي */
+        .services-section {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to left, var(--accent), #ffd700, var(--accent));
+            border-radius: 3px;
+            animation: linePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes linePulse {
+            0%, 100% { 
+                width: 100%;
+                opacity: 0.7;
+            }
+            50% { 
+                width: 100%;
+                opacity: 1;
+            }
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            background: rgba(15, 20, 38, 0.6);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        
+        /* الخدمة الرئيسية - السيارات الكهربائية */
+        .main-service {
+            background: rgba(15, 20, 38, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .main-service:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 165, 0, 0.3);
+            border-color: var(--accent);
+        }
+        
+        .main-service-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media (min-width: 992px) {
+            .main-service-content {
+                flex-direction: row;
+            }
+        }
+        
+        .main-service-image {
+            flex: 1;
+            height: 300px;
+            background: linear-gradient(135deg, rgb(255, 179, 0), rgb(255, 115, 0));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-service-info {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .main-service-info h3 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .main-service-info p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .service-btn {
+            display: inline-block;
+            background: linear-gradient(to left, var(--accent), #ff8c00);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+        }
+        
+        .service-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+        }
+        
+        /* الخدمات الثانوية */
+        .secondary-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .secondary-service {
+            background: rgba(15, 20, 38, 0.85);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .secondary-service::before {
+            content: 'قريباً';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .secondary-service:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .secondary-service i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .secondary-service h4 {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .secondary-service p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        /* الفوتر (الجزء السفلي) - غير مثبت */
+        footer {
+            background: rgba(15, 20, 38, 0.95);
+            padding: 40px 20px 30px;
+            margin-top: 50px;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5);
+            border-top: 3px solid var(--accent);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section {
+            padding: 10px;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-section h3 i {
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+        
+        .contact-info li i {
+            color: var(--accent);
+            width: 20px;
+        }
+        
+        .help-links {
+            list-style: none;
+        }
+        
+        .help-links li {
+            margin-bottom: 10px;
+        }
+        
+        .help-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .help-links a:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+        
+        .garage-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* قسم التسجيل كمسؤول داخل الفوتر */
+        .admin-registration-box {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(178, 31, 31, 0.2));
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            text-align: center;
+        }
+        
+        .admin-registration-box h4 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .admin-registration-btn {
+            display: inline-block;
+            background: linear-gradient(to left, var(--accent), var(--secondary));
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .admin-registration-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(255, 140, 0, 0.4);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .logo-text h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .slider-section {
+                height: 300px;
+            }
+            
+            .slide-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .main-service-image {
+                height: 200px;
+                font-size: 3rem;
+            }
+            
+            .main-service-info h3 {
+                font-size: 1.6rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-section {
+                padding: 5px;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 1.7rem;
+            }
+            
+            .secondary-services {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* تأثيرات دخول */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الهيدر مع اللوجو والقوائم -->
+        <header class="fade-in">
+            <div class="logo">
+                <div class="logo-icon floating">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>الكراج الذكي</h1>
+                    <p>حلول متكاملة لصيانة سيارتك</p>
+                </div>
+            </div>
+            
+            <div class="nav-links">
+                <a href="./Smart Garage Store.html">الخدمات</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('services').scrollIntoView({behavior: 'smooth'});">الكراجات</a>
+            </div>
+        </header>
+        
+        <!-- قسم الصور المتحركة -->
+        <section class="slider-section fade-in">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="مركز صيانة السيارات الكهربائية">
+                    <div class="slide-content">
+                        <h3>مركز الصيانة المتكامل للسيارات الكهربائية</h3>
+                        <p>أحدث التقنيات وخدمات الصيانة الشاملة</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="محطة شحن السيارات الكهربائية">
+                    <div class="slide-content">
+                        <h3>محطات شحن سريع للسيارات الكهربائية</h3>
+                        <p>أسرع محطات شحن في المنطقة بتقنيات حديثة</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="فحص بطارية السيارة الكهربائية">
+                    <div class="slide-content">
+                        <h3>فحص وتقييم بطاريات السيارات الكهربائية</h3>
+                        <p>خدمات متخصصة لفحص وتقييم أداء البطاريات</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <div class="slider-dot active" data-slide="0"></div>
+                <div class="slider-dot" data-slide="1"></div>
+                <div class="slider-dot" data-slide="2"></div>
+            </div>
+        </section>
+        
+        <!-- قسم الخدمات -->
+        <section id="services" class="services-section fade-in delay-1">
+            <h2 class="section-title"><span style="color: #141410;">خدمات سمارت كراج</span></h2>
+            <p class="section-subtitle">نقدم مجموعة متنوعة من الخدمات المتخصصة لأنواع مختلفة من المركبات، مع التركيز على أحدث تقنيات السيارات الكهربائية</p>
+            
+            <!-- الخدمة الرئيسية - السيارات الكهربائية -->
+            <div class="main-service" onclick="window.location.href='./Electric Cars Parking.html'">   
+                <div class="main-service-content">
+                    <div class="main-service-image">
+                        <i class="fas fa-charging-station floating"></i>
+                    </div>
+                    <div class="main-service-info">
+                        <h3>كراج السيارات الكهربائية</h3>
+                        <p>مركز متكامل لصيانة وخدمة السيارات الكهربائية والهجينة. نقدم أحدث خدمات الشحن السريع، فحص البطاريات، والصيانة الوقائية باستخدام أحدث التقنيات والكوادر المؤهلة.</p>
+                        <a href="./Electric Cars Parking.html" class="service-btn">الدخول   <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الخدمات الثانوية -->
+            <div class="secondary-services">
+                <div class="secondary-service">
+                    <i class="fas fa-gas-pump"></i>
+                    <h4>كراج السيارات العادية</h4>
+                    <p>خدمات الصيانة والوقود للسيارات التقليدية التي تعمل بالبنزين أو الديزل. يشمل ذلك تغيير الزيوت، فحص المحرك، وتصليح الأعطال الميكانيكية.</p>
+                </div>
+                
+                <div class="secondary-service">
+                    <i class="fas fa-motorcycle"></i>
+                    <h4>كراج الدراجات النارية</h4>
+                    <p>خدمات الصيانة والوقود للدراجات النارية بمختلف أنواعها. نقدم فحص الإطارات، صيانة الفرامل، وتعديلات الأداء للدراجات النارية.</p>
+                </div>
+                
+                <div class="secondary-service">
+                    <i class="fas fa-bicycle"></i>
+                    <h4>كراج الدراجات الكهربائية</h4>
+                    <p>خدمات الشحن والصيانة للدراجات الكهربائية والهجينة. يشمل ذلك فحص البطاريات، صيانة الأنظمة الكهربائية، وتصليح الأعطال الإلكترونية.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- الفوتر (الجزء السفلي) - غير مثبت -->
+        <footer class="fade-in delay-2">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-address-card"></i> بيانات الاتصال</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i>بغــداد - الكـراده ـ مقـابل كلـية المـنصور الجـامعة</li>
+                        <li><i class="fas fa-phone"></i> 0770XXXXXXX</li>
+                        <li><i class="fas fa-envelope"></i> smartgarage@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> الأحد - الخميس: 6:00 ص - 10:00 م</li>
+                    </ul>
+                    
+                </div>
+                
+                <div class="footer-section">
+                    <h3><i class="fas fa-life-ring"></i> المساعدة والدعم</h3>
+                    <ul class="help-links">
+                        <li><a href="#"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
+                        <li><a href="#"><i class="fas fa-headset"></i> الدعم الفني</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> دليل المستخدم</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a></li>
+                        <li><a href="Login Admins.html"><i class="fas fa-sign-in-alt"></i> دخول المسؤولين</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3><i class="fas fa-info-circle"></i> عن سمارت كراج</h3>
+                    <p class="garage-description">
+                        سمارت كراج هو مركز متكامل لصيانة وخدمة جميع أنواع المركبات، مع التركيز على أحدث تقنيات السيارات الكهربائية. نقدم خدمات عالية الجودة بأسعار منافسة، ونسعى دائمًا لتحقيق رضا عملائنا من خلال فريق مؤهل ووسائل تقنية متطورة.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة &copy; 2026 سمارت كراج. تصميم وتطوير فريق سمارت كراج.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // كود السلايدر التلقائي
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        
+        function showSlide(index) {
+            // إخفاء جميع الشرائح
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // إظهار الشريحة المطلوبة
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        // التبديل التلقائي بين الشرائح
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+        
+        // بدء التبديل التلقائي
+        setInterval(nextSlide, 5000);
+        
+        // إضافة تفاعل للنقاط
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // تأثيرات ظهور متتالية للعناصر
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كراج سمارت - الموقف الرئيسي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #ffa500;
+            --secondary: #b21f1f;
+            --accent: #FFA500;
+            --dark: #0f1426;
+            --light: #f8f9fa;
+            --orange-light: #ffd699;
+            --orange-medium: #ff9900;
+            --orange-dark: #cc8400;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--orange-light), var(--orange-medium), var(--orange-dark));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            color: var(--light);
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* الهيدر */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 0;
+            margin-bottom: 40px;
+            background: rgba(15, 20, 38, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.6));
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        .logo-text h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo-text p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        /* شعار "For Electric Cars" */
+        .main-title-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 60px;
+            margin: 0 auto 40px auto;
+            background: rgba(15, 20, 38, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            max-width: 800px;
+            border: 2px solid var(--accent);
+        }
+        
+        .main-title-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.15) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 2px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { 
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 5px rgba(255, 165, 0, 0.3);
+            }
+            100% { 
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 165, 0, 0.7), 0 0 25px rgba(255, 165, 0, 0.4);
+            }
+        }
+        
+        /* تصميم مواقف السيارات */
+        .parking-layout {
+            background: rgba(15, 20, 38, 0.85);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            min-height: 850px;
+        }
+        
+        /* خريطة مصغرة */
+        .mini-map {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 165, 0, 0.4);
+        }
+        
+        .mini-map h3 {
+            color: var(--accent);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        /* الحاوية الرئيسية للخريطة */
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 40px;
+            min-height: 750px;
+            position: relative;
+        }
+        
+        /* الصف العلوي (B1-B8) */
+        .top-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 30px;
+            background: rgba(255, 153, 0, 0.1);
+            border-radius: 15px;
+            min-height: 180px;
+        }
+        
+        /* الصف الأوسط - ثلاثة أقسام */
+        .middle-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 40px;
+            min-height: 500px;
+            align-items: stretch;
+        }
+        
+        /* الجانب الأيسر (C) */
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 30px;
+            background: rgba(255, 153, 0, 0.1);
+            border-radius: 15px;
+            align-items: center;
+            border: 2px solid rgba(255, 153, 0, 0.1);
+        }
+        
+        /* الجانب الأيمن (A) */
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 30px;
+            background: rgba(255, 153, 0, 0.1);
+            border-radius: 15px;
+            align-items: center;
+            border: 2px solid rgba(255, 153, 0, 0.1);
+        }
+        
+        /* المنطقة الوسطى */
+        .center-section {
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            background: rgba(255, 153, 0, 0.1);
+            border-radius: 15px;
+            border: 3px solid rgba(255, 165, 0, 0.6);
+            position: relative;
+        }
+        
+        /* B9 و B10 في أسفل المنطقة الوسطى */
+        .bottom-group {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 60px;
+            margin-top: auto;
+            padding-top: 30px;
+            padding-bottom: 20px;
+        }
+        
+        .center-label {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .group-label {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* تصميم الموقف الفردي */
+        .parking-slot {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 3px solid var(--accent);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
+            padding: 15px;
+            min-width: 130px;
+            min-height: 110px;
+        }
+        
+        .parking-slot:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 165, 0, 0.6);
+            background: rgba(255, 165, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .slot-id {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .slot-status {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        
+        .status-available {
+            background-color: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .status-occupied {
+            background-color: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+        }
+        
+        /* تفاصيل ESP - تم التعديل ليتناسب مع الثيم */
+        .esp-details {
+            background: rgba(15, 20, 38, 0.95);
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            border: 3px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .esp-details::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.15) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+        }
+        
+        .esp-details.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 165, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .details-header h3 {
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+        
+        .close-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: #ffd700;
+            transform: scale(1.1);
+        }
+        
+        .sensor-data {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .data-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 150px;
+            justify-content: center;
+            border: 2px solid rgba(255, 165, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .data-item:hover {
+            background: rgba(255, 165, 0, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .data-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+        
+        .data-value {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .battery-level {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .battery-fill {
+            height: 100%;
+            background: linear-gradient(to right, #ff0000, #ffa500, #00ff00);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        /* تنبيه الحالة */
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .status-connected {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 2px solid #00ff00;
+        }
+        
+        .status-disconnected {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            border: 2px solid #ff0000;
+        }
+        
+        /* التنبيه التفاعلي */
+        .note {
+            background: rgba(15, 20, 38, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-right: 6px solid var(--accent);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .note:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 165, 0, 0.3);
+            border: 2px solid rgba(255, 165, 0, 0.4);
+        }
+        
+        .note h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .note p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 1400px) {
+            .container {
+                max-width: 95%;
+            }
+            
+            .parking-slot {
+                min-width: 120px;
+                min-height: 100px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .middle-row {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                gap: 30px;
+            }
+            
+            .center-section {
+                min-height: 200px;
+            }
+            
+            .left-section, .right-section {
+                min-height: 300px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .logo-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .top-row {
+                gap: 20px;
+            }
+            
+            .parking-slot {
+                min-width: 110px;
+                min-height: 90px;
+            }
+            
+            .slot-id {
+                font-size: 1.2rem;
+            }
+            
+            .bottom-group {
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-title {
+                font-size: 1.7rem;
+            }
+            
+            .main-title-box {
+                padding: 20px 40px;
+            }
+            
+            .top-row {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .parking-slot {
+                min-width: 100px;
+                min-height: 85px;
+                padding: 12px;
+            }
+            
+            .bottom-group {
+                gap: 30px;
+            }
+            
+            .connection-status {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .main-title {
+                font-size: 1.5rem;
+            }
+            
+            .main-title-box {
+                padding: 15px 30px;
+            }
+            
+            .parking-layout {
+                padding: 25px;
+            }
+            
+            .top-row {
+                gap: 12px;
+                padding: 20px;
+            }
+            
+            .parking-slot {
+                min-width: 90px;
+                min-height: 80px;
+                padding: 10px;
+            }
+            
+            .slot-id {
+                font-size: 1.1rem;
+            }
+            
+            .left-section, .right-section, .center-section {
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .bottom-group {
+                gap: 20px;
+            }
+            
+            .esp-details {
+                padding: 25px;
+            }
+            
+            .sensor-data {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* تأثيرات دخول */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- مؤشر حالة الاتصال مع ESP32 -->
+    <div id="connectionStatus" class="connection-status status-disconnected">
+        <i class="fas fa-microchip"></i>
+        <span>غير متصل بـ ESP32</span>
+    </div>
+    
+    <div class="container">
+        <!-- الهيدر مع اللوجو -->
+        <header class="fade-in">
+            <div class="logo">
+                <div class="logo-icon floating">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>SMART GARAGE</h1>
+                    <p>الموقف الرئيسي للسيارات الكهربائية</p>
+                </div>
+            </div>
+        </header>
+        
+        <!-- المحتوى الرئيسي -->
+        <section class="main-content">
+            <!-- شعار "For Electric Cars" -->
+            <div class="main-title-box fade-in">
+                <h2 class="main-title">FOR ELECTRIC CARS</h2>
+            </div>
+            
+            <!-- خريطة مصغرة -->
+            <div class="parking-layout fade-in">
+                <div class="mini-map">
+                    <h3><i class="fas fa-map-marked-alt"></i> خريطة الكراج</h3>
+                    <div class="map-container">
+                        <!-- الصف العلوي: B1 إلى B8 -->
+                        <div class="top-row">
+                            <div class="parking-slot fade-in delay-1" data-slot="B1">
+                                <div class="slot-id">B1</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-available"></span>
+                                    متاح
+                                </div>
+                            </div>
+                            <div class="parking-slot fade-in delay-2" data-slot="B2">
+                                <div class="slot-id">B2</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-occupied"></span>
+                                    مشغول
+                                </div>
+                            </div>
+                            <div class="parking-slot fade-in delay-3" data-slot="B3">
+                                <div class="slot-id">B3</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-available"></span>
+                                    متاح
+                                </div>
+                            </div>
+                            <div class="parking-slot fade-in delay-1" data-slot="B4">
+                                <div class="slot-id">B4</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-occupied"></span>
+                                    مشغول
+                                </div>
+                            </div>
+                            <div class="parking-slot fade-in delay-2" data-slot="B5">
+                                <div class="slot-id">B5</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-available"></span>
+                                    متاح
+                                </div>
+                            </div>
+                            <div class="parking-slot fade-in delay-3" data-slot="B6">
+                                <div class="slot-id">B6</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-occupied"></span>
+                                    مشغول
+                                </div>
+                            </div>
+                            <div class="parking-slot fade-in delay-4" data-slot="B7">
+                                <div class="slot-id">B7</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-available"></span>
+                                    متاح
+                                </div>
+                            </div>
+                            <div class="parking-slot fade-in delay-5" data-slot="B8">
+                                <div class="slot-id">B8</div>
+                                <div class="slot-status">
+                                    <span class="status-indicator status-occupied"></span>
+                                    مشغول
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الصف الأوسط - ثلاثة أقسام -->
+                        <div class="middle-row">
+                            <!-- الجانب الأيسر: C1 إلى C6 -->
+                            <div class="left-section">
+                                <div class="group-label">
+                                    <i class="fas fa-arrow-right"></i>
+                                   القسم (C)
+                                </div>
+                                <!-- C1, C2, C3 -->
+                                <div class="parking-slot fade-in delay-1" data-slot="C1">
+                                    <div class="slot-id">C1</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-available"></span>
+                                        متاح
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-2" data-slot="C2">
+                                    <div class="slot-id">C2</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-occupied"></span>
+                                        مشغول
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-3" data-slot="C3">
+                                    <div class="slot-id">C3</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-available"></span>
+                                        متاح
+                                    </div>
+                                </div>
+                                <!-- C4, C5, C6 -->
+                                <div class="parking-slot fade-in delay-1" data-slot="C4">
+                                    <div class="slot-id">C4</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-available"></span>
+                                        متاح
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-2" data-slot="C5">
+                                    <div class="slot-id">C5</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-occupied"></span>
+                                        مشغول
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-3" data-slot="C6">
+                                    <div class="slot-id">C6</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-available"></span>
+                                        متاح
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- المنطقة الوسطى -->
+                            <div class="center-section">
+                                <div class="center-label">
+                                    <i class="fas fa-road"></i>
+                                    المنطقة الوسطى
+                                </div>
+                                
+                                <!-- B9 و B10 في أسفل المنطقة الوسطى -->
+                                <div class="bottom-group">
+                                    <div class="parking-slot fade-in delay-1" data-slot="B9">
+                                        <div class="slot-id">B9</div>
+                                        <div class="slot-status">
+                                            <span class="status-indicator status-available"></span>
+                                            متاح
+                                        </div>
+                                    </div>
+                                    <div class="parking-slot fade-in delay-2" data-slot="B10">
+                                        <div class="slot-id">B10</div>
+                                        <div class="slot-status">
+                                            <span class="status-indicator status-occupied"></span>
+                                            مشغول
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                            
+                            <!-- الجانب الأيمن: A6 إلى A1 -->
+                            <div class="right-section">
+                                <div class="group-label">
+                                    القسم (A)
+                                    <i class="fas fa-arrow-left"></i>
+                                </div>
+                                <div class="parking-slot fade-in delay-1" data-slot="A6">
+                                    <div class="slot-id">A6</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-available"></span>
+                                        متاح
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-2" data-slot="A5">
+                                    <div class="slot-id">A5</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-occupied"></span>
+                                        مشغول
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-3" data-slot="A4">
+                                    <div class="slot-id">A4</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-available"></span>
+                                        متاح
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-1" data-slot="A3">
+                                    <div class="slot-id">A3</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-occupied"></span>
+                                        مشغول
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-2" data-slot="A2">
+                                    <div class="slot-id">A2</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-available"></span>
+                                        متاح
+                                    </div>
+                                </div>
+                                <div class="parking-slot fade-in delay-3" data-slot="A1">
+                                    <div class="slot-id">A1</div>
+                                    <div class="slot-status">
+                                        <span class="status-indicator status-occupied"></span>
+                                        مشغول
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- تفاصيل ESP -->
+                <div class="esp-details" id="espDetails">
+                    <div class="details-header">
+                        <h3 id="detailsTitle">تفاصيل الموقف</h3>
+                        <button class="close-btn" id="closeDetails">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="sensor-data">
+                        <div class="data-item">
+                            <div class="data-label">
+                                <i class="fas fa-car"></i>
+                                حالة الموقف:
+                            </div>
+                            <div class="data-value" id="slotStatus">متاح</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">
+                                <i class="fas fa-battery-half"></i>
+                                سعة البطارية:
+                            </div>
+                            <div class="data-value" id="batteryLevel">85%</div>
+                            <div class="battery-level">
+                                <div class="battery-fill" id="batteryFill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">
+                                <i class="fas fa-temperature-high"></i>
+                                درجة الحرارة:
+                            </div>
+                            <div class="data-value" id="temperature">32°C</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">
+                                <i class="fas fa-clock"></i>
+                                آخر تحديث:
+                            </div>
+                            <div class="data-value" id="lastUpdate">00:00:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- التنبيه التفاعلي -->
+        <div class="note fade-in">
+            <h3><i class="fas fa-charging-station"></i> توجيهات كراج السيارات الكهربائية</h3>
+            <p>
+                <strong>مرحباً بكم في كراج السيارات الكهربائية:</strong><br>
+                1. يرجى إيقاف السيارة في الموقف المخصص للشحن فقط.<br>
+                2. تأكد من توصيل كابل الشحن بشكل صحيح قبل المغادرة.<br>
+                3. يمكنك مراقبة حالة الشحن والبطارية من خلال تفاصيل الموقف.<br>
+                4. يُرجى عدم إيقاف السيارة في موقف مخصص للسيارات غير الكهربائية.<br>
+                5. يفضل إعادة السيارة إلى الموقف بعد انتهاء الشحن.<br>
+                6. في حالة وجود أي مشكلة، يرجى الاتصال بدعم الكراج على الرقم: 07700000000
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // بيانات لكل موقف
+        const slotData = {
+            // الصف العلوي: B1 إلى B8
+            'B1': { status: 'متاح', battery: 90, temperature: 28, lastUpdate: '14:30:22' },
+            'B2': { status: 'مشغول', battery: 45, temperature: 30, lastUpdate: '14:28:15' },
+            'B3': { status: 'متاح', battery: 80, temperature: 27, lastUpdate: '14:32:10' },
+            'B4': { status: 'مشغول', battery: 60, temperature: 31, lastUpdate: '14:29:45' },
+            'B5': { status: 'متاح', battery: 95, temperature: 26, lastUpdate: '14:31:30' },
+            'B6': { status: 'مشغول', battery: 35, temperature: 32, lastUpdate: '14:27:55' },
+            'B7': { status: 'متاح', battery: 75, temperature: 29, lastUpdate: '14:33:20' },
+            'B8': { status: 'مشغول', battery: 50, temperature: 33, lastUpdate: '14:30:05' },
+            
+            // الجانب الأيمن: A6 إلى A1
+            'A6': { status: 'متاح', battery: 85, temperature: 28, lastUpdate: '14:31:15' },
+            'A5': { status: 'مشغول', battery: 40, temperature: 31, lastUpdate: '14:28:40' },
+            'A4': { status: 'متاح', battery: 70, temperature: 27, lastUpdate: '14:32:55' },
+            'A3': { status: 'مشغول', battery: 55, temperature: 30, lastUpdate: '14:29:20' },
+            'A2': { status: 'متاح', battery: 88, temperature: 26, lastUpdate: '14:33:45' },
+            'A1': { status: 'مشغول', battery: 30, temperature: 34, lastUpdate: '14:27:30' },
+            
+            // الجانب الأيسر: C1 إلى C6
+            'C1': { status: 'متاح', battery: 83, temperature: 27, lastUpdate: '14:32:05' },
+            'C2': { status: 'مشغول', battery: 65, temperature: 29, lastUpdate: '14:29:10' },
+            'C3': { status: 'متاح', battery: 78, temperature: 28, lastUpdate: '14:33:35' },
+            'C4': { status: 'متاح', battery: 87, temperature: 26, lastUpdate: '14:30:50' },
+            'C5': { status: 'مشغول', battery: 42, temperature: 31, lastUpdate: '14:28:25' },
+            'C6': { status: 'متاح', battery: 95, temperature: 24, lastUpdate: '14:34:00' },
+            
+            // المنطقة الوسطى: B9, B10
+            'B9': { status: 'متاح', battery: 92, temperature: 25, lastUpdate: '14:31:40' },
+            'B10': { status: 'مشغول', battery: 48, temperature: 32, lastUpdate: '14:29:55' }
+        };
+
+        // حالة الاتصال مع ESP32
+        let espConnected = false;
+
+        // وظيفة لمحاكاة الاتصال مع ESP32
+        function simulateESP32Connection() {
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            // تبديل حالة الاتصال كل 30 ثانية
+            setInterval(() => {
+                espConnected = !espConnected;
+                
+                if (espConnected) {
+                    connectionStatus.className = 'connection-status status-connected';
+                    connectionStatus.innerHTML = '<i class="fas fa-microchip"></i><span>متصل بـ ESP32</span>';
+                    
+                    // تحديث حالة المواقف بشكل عشوائي عند الاتصال
+                    updateRandomSlots();
+                } else {
+                    connectionStatus.className = 'connection-status status-disconnected';
+                    connectionStatus.innerHTML = '<i class="fas fa-microchip"></i><span>غير متصل بـ ESP32</span>';
+                }
+            }, 30000);
+            
+            // الاتصال المبدئي بعد 3 ثواني
+            setTimeout(() => {
+                espConnected = true;
+                connectionStatus.className = 'connection-status status-connected';
+                connectionStatus.innerHTML = '<i class="fas fa-microchip"></i><span>متصل بـ ESP32</span>';
+            }, 3000);
+        }
+
+        // وظيفة لتحديث المواقف بشكل عشوائي (لمحاكاة بيانات ESP32 الحقيقية)
+        function updateRandomSlots() {
+            if (!espConnected) return;
+            
+            // تحديث 2-3 مواقف عشوائياً في كل مرة
+            const slots = Object.keys(slotData);
+            const numToUpdate = Math.floor(Math.random() * 2) + 2; // 2-3 مواقف
+            
+            for (let i = 0; i < numToUpdate; i++) {
+                const randomSlot = slots[Math.floor(Math.random() * slots.length)];
+                const slotElement = document.querySelector(`[data-slot="${randomSlot}"]`);
+                
+                // تحديث البيانات بشكل عشوائي
+                const newStatus = Math.random() > 0.5 ? 'متاح' : 'مشغول';
+                const newBattery = Math.floor(Math.random() * 100);
+                const newTemp = Math.floor(Math.random() * 15) + 25; // 25-40 درجة
+                const now = new Date();
+                const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                                  now.getMinutes().toString().padStart(2, '0') + ':' + 
+                                  now.getSeconds().toString().padStart(2, '0');
+                
+                // تحديث البيانات
+                slotData[randomSlot] = {
+                    status: newStatus,
+                    battery: newBattery,
+                    temperature: newTemp,
+                    lastUpdate: timeString
+                };
+                
+                // تحديث العرض البصري
+                if (slotElement) {
+                    const statusIndicator = slotElement.querySelector('.status-indicator');
+                    const statusText = slotElement.querySelector('.slot-status');
+                    
+                    if (newStatus === 'متاح') {
+                        statusIndicator.className = 'status-indicator status-available';
+                        statusText.innerHTML = '<span class="status-indicator status-available"></span> متاح';
+                    } else {
+                        statusIndicator.className = 'status-indicator status-occupied';
+                        statusText.innerHTML = '<span class="status-indicator status-occupied"></span> مشغول';
+                    }
+                    
+                    // إضافة تأثير التحديث
+                    slotElement.style.animation = 'none';
+                    setTimeout(() => {
+                        slotElement.style.animation = '';
+                    }, 10);
+                }
+            }
+        }
+
+        // عرض تفاصيل ESP عند النقر على موقف
+        document.querySelectorAll('.parking-slot').forEach(slot => {
+            slot.addEventListener('click', function() {
+                const slotId = this.getAttribute('data-slot');
+                const data = slotData[slotId];
+                
+                // تحديث البيانات في تفاصيل ESP
+                document.getElementById('detailsTitle').textContent = `تفاصيل الموقف ${slotId}`;
+                document.getElementById('slotStatus').textContent = data.status;
+                document.getElementById('batteryLevel').textContent = `${data.battery}%`;
+                document.getElementById('batteryFill').style.width = `${data.battery}%`;
+                document.getElementById('temperature').textContent = `${data.temperature}°C`;
+                document.getElementById('lastUpdate').textContent = data.lastUpdate;
+                
+                // إظهار تفاصيل ESP
+                document.getElementById('espDetails').classList.add('active');
+                
+                // توجيه الشاشة إلى تفاصيل الموقف
+                document.getElementById('espDetails').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // إذا كان متصلاً بـ ESP32، إرسال طلب للحصول على بيانات حديثة
+                if (espConnected) {
+                    console.log(`طلب بيانات حديثة للموقف ${slotId} من ESP32`);
+                }
+            });
+        });
+
+        // إغلاق تفاصيل ESP
+        document.getElementById('closeDetails').addEventListener('click', function() {
+            document.getElementById('espDetails').classList.remove('active');
+        });
+
+        // تأثيرات ظهور متتالية للعناصر
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // بدء محاكاة الاتصال مع ESP32
+            simulateESP32Connection();
+            
+            // بدء التحديث التلقائي للمواقف كل 10 ثواني
+            setInterval(updateRandomSlots, 10000);
+        });
+    </script>
+</body>
+</html>

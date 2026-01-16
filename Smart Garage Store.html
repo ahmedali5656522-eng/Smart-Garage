@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Garage - الخدمات التجارية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --orange-light: #ffd699;
+            --orange-medium: #ff9900;
+            --orange-dark: #cc8400;
+            --orange-gradient: linear-gradient(135deg, #ffd699, #ff9900, #cc8400);
+            --dark: #181818; /* أغمق */
+            --light: #f8f9fa;
+            --header-footer-bg: #181818; /* خلفية داكنة للهيدر والفوتر */
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffd699 0%, #ff9900 50%, #cc8400 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* الهيدر */
+        header {
+            background: var(--header-footer-bg);
+            padding: 20px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--orange-medium);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--orange-medium);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        .logo-text h1 {
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text .en-name {
+            color: var(--orange-light);
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            color: var(--orange-light);
+            font-size: 1rem;
+        }
+        
+        /* القائمة */
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .main-nav a:hover, .main-nav a.active {
+            background: var(--orange-gradient);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4);
+        }
+        
+        /* البانر الرئيسي */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h2 {
+            font-size: 3.2rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: titleFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #333;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background: #181818;
+            color: white;
+            padding: 16px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: btnPulse 2s infinite;
+        }
+        
+        @keyframes btnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hero-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* قسم الخدمات */
+        .services {
+            padding: 80px 0;
+            background: #181818;
+            border-radius: 30px;
+            margin: 40px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.6rem;
+            color: white;
+            display: inline-block;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--orange-gradient);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* بطاقات الخدمات */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 153, 0, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--orange-gradient);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 153, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--orange-medium);
+            margin-bottom: 25px;
+            text-align: center;
+            display: block;
+        }
+        
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .service-card p {
+            color: #ddd;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .service-features li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-right: 25px;
+            color: #eee;
+        }
+        
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--orange-medium);
+            font-weight: bold;
+        }
+        
+        .service-price {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--orange-light);
+            margin-bottom: 20px;
+        }
+        
+        .service-price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #aaa;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--orange-gradient);
+            color: var(--dark);
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 153, 0, 0.4);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* قسم المنتجات */
+        .products {
+            padding: 80px 0;
+            background: #181818;
+            border-radius: 30px;
+            margin: 40px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid rgba(255, 153, 0, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-img {
+            height: 180px;
+            background: linear-gradient(135deg, rgba(255, 214, 153, 0.2), rgba(255, 153, 0, 0.3));
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--orange-medium);
+            font-size: 3.5rem;
+            width: 100%;
+        }
+        
+        .product-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .product-card p {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--orange-light);
+            margin-bottom: 15px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: var(--header-footer-bg);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+            border-top: 5px solid var(--orange-medium);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--orange-light);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--orange-gradient);
+        }
+        
+        .footer-col p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--orange-light);
+            transform: translateX(-5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--orange-medium);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* تأثيرات الظهور */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* التجاوبية */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .services, .products {
+                margin: 40px 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .service-card {
+                padding: 25px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .main-nav a {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Smart Garage</h1>
+                    <p>Store</p>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home" class="active">الرئيسية</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#products">المنتجات</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- البانر الرئيسي -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2 class="fade-in">كراج سمارت - الخدمات التجارية</h2>
+            <p class="fade-in">نقدم لكم أفضل خدمات العناية بالسيارات بأسعار تنافسية وجودة عالية. خبرتنا تمتد لأكثر من 15 عاماً في مجال خدمة السيارات في العراق.</p>
+            <a href="#services" class="hero-btn fade-in">استعرض خدماتنا</a>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>خدمات الكراج الذكي</h2>
+                <p>نقدم مجموعة متكاملة من الخدمات المتخصصة للعناية بسيارتك والحفاظ على أدائها المثالي في بغداد</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- خدمة 1 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-car-wash service-icon"></i>
+                    <h3>غسل وتشحيم السيارات</h3>
+                    <p>خدمة شاملة لغسل وتلميع وتشحيم سيارتك باستخدام أفضل المواد والتقنيات الحديثة.</p>
+                    <ul class="service-features">
+                        <li>غسل خارجي شامل</li>
+                        <li>تنظيف داخلي عميق</li>
+                        <li>تلميع وتشحيم</li>
+                        <li>معالجة البقع الصعبة</li>
+                        <li>تلميع الإطارات</li>
+                    </ul>
+                    <div class="service-price">15,000 د.ع <span>للسيارات الصغيرة</span></div>
+                    <button class="btn contact-btn">اتصل للاستفسار</button>
+                </div>
+                
+                <!-- خدمة 2 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-oil-can service-icon"></i>
+                    <h3>تبديل زيت المحرك</h3>
+                    <p>استبدال زيت المحرك والفلاتر بزيت عالي الجودة يضمن عمر أطول لمحرك سيارتك.</p>
+                    <ul class="service-features">
+                        <li>زيت محرك عالي الجودة</li>
+                        <li>استبدال فلتر الزيت</li>
+                        <li>فحص مستوى الزيت</li>
+                        <li>فحص نظام التبريد</li>
+                        <li>ضمان لمدة 6 أشهر</li>
+                    </ul>
+                    <div class="service-price">25,000 د.ع <span>يشمل الفلتر</span></div>
+                    <button class="btn contact-btn">اتصل للاستفسار</button>
+                </div>
+                
+                <!-- خدمة 3 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-tools service-icon"></i>
+                    <h3>فحص وتشخيص السيارات</h3>
+                    <p>فحص شامل للسيارة باستخدام أحدث أجهزة التشخيص للكشف عن الأعطال والمشاكل.</p>
+                    <ul class="service-features">
+                        <li>فحص المحرك الإلكتروني</li>
+                        <li>فحص نظام الفرامل</li>
+                        <li>فحص نظام التعليق</li>
+                        <li>فحص النظام الكهربائي</li>
+                        <li>تقرير مفصل عن الحالة</li>
+                    </ul>
+                    <div class="service-price">20,000 د.ع <span>يشمل التقرير</span></div>
+                    <button class="btn contact-btn">اتصل للاستفسار</button>
+                </div>
+                
+                <!-- خدمة 4 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-tire service-icon"></i>
+                    <h3>نفخ وخدمة الإطارات</h3>
+                    <p>فحص ضغط الهواء وتوازن الإطارات وخدمات أخرى للحفاظ على سلامة إطارات سيارتك.</p>
+                    <ul class="service-features">
+                        <li>فحص ضغط الهواء</li>
+                        <li>توازن الإطارات</li>
+                        <li>تبديل أماكن الإطارات</li>
+                        <li>فحص التآكل</li>
+                        <li>إصلاح الثقوب البسيطة</li>
+                    </ul>
+                    <div class="service-price">10,000 د.ع <span>لأربع إطارات</span></div>
+                    <button class="btn contact-btn">اتصل للاستفسار</button>
+                </div>
+                
+                <!-- خدمة 5 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-wind service-icon"></i>
+                    <h3>بيع معطرات السيارات</h3>
+                    <p>مجموعة متنوعة من معطرات السيارات بروائح مميزة تدوم طويلاً وتعطي رائحة منعشة.</p>
+                    <ul class="service-features">
+                        <li>مجموعة متنوعة من الروائح</li>
+                        <li>عمر طويل يصل إلى 60 يوم</li>
+                        <li>تصميمات جذابة</li>
+                        <li>آمنة للسيارة والعائلة</li>
+                        <li>أسعار مناسبة للجميع</li>
+                    </ul>
+                    <div class="service-price">5,000 د.ع <span>للمعطر الواحد</span></div>
+                    <button class="btn contact-btn">اتصل للطلب</button>
+                </div>
+                
+                <!-- خدمة 6 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-spray-can service-icon"></i>
+                    <h3>تنظيف وتلميع المحرك</h3>
+                    <p>تنظيف وتلميع محرك السيارة لإزالة الأتربة والشحوم والحفاظ على مظهره الجديد.</p>
+                    <ul class="service-features">
+                        <li>تنظيف المحرك بالبخار</li>
+                        <li>إزالة الشحوم والأوساخ</li>
+                        <li>تلميع الأجزاء الخارجية</li>
+                        <li>فحص التسريبات</li>
+                        <li>معالجة الصدأ البسيط</li>
+                    </ul>
+                    <div class="service-price">18,000 د.ع <span>للخدمة الشاملة</span></div>
+                    <button class="btn contact-btn">اتصل للاستفسار</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>منتجات الكراج الذكي</h2>
+                <p>سلع وعناصر عالية الجودة للعناية بسيارتك وتحسين تجربة القيادة</p>
+            </div>
+            
+            <div class="products-grid">
+                <!-- منتج 1 -->
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h4>معطر سيارة فاخر</h4>
+                    <p>معطر برائحة الفانيلا الفرنسية يدوم 60 يوماً</p>
+                    <div class="product-price">7,000 د.ع</div>
+                    <button class="btn contact-btn">اطلب الآن</button>
+                </div>
+                
+                <!-- منتج 2 -->
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <h4>زيت محرك سوبر</h4>
+                    <p>زيت محرك عالي الجودة مناسب لجميع أنواع السيارات</p>
+                    <div class="product-price">35,000 د.ع</div>
+                    <button class="btn contact-btn">اطلب الآن</button>
+                </div>
+                
+                <!-- منتج 3 -->
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <h4>منظف زجاج قوي</h4>
+                    <p>منظف زجاج السيارة يزيل الأوساخ بسهولة</p>
+                    <div class="product-price">6,000 د.ع</div>
+                    <button class="btn contact-btn">اطلب الآن</button>
+                </div>
+                
+                <!-- منتج 4 -->
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <i class="fas fa-soap"></i>
+                    </div>
+                    <h4>شامبو لغسل السيارات</h4>
+                    <p>شامبو خاص لغسل السيارات لا يؤثر على الطلاء</p>
+                    <div class="product-price">12,000 د.ع</div>
+                    <button class="btn contact-btn">اطلب الآن</button>
+                </div>
+                
+                <!-- منتج 5 -->
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h4>سائل تبريد المحرك</h4>
+                    <p>سائل تبريد عالي الجودة يحافظ على درجة حرارة المحرك</p>
+                    <div class="product-price">15,000 د.ع</div>
+                    <button class="btn contact-btn">اطلب الآن</button>
+                </div>
+                
+                <!-- منتج 6 -->
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <i class="fas fa-pump-soap"></i>
+                    </div>
+                    <h4>معقم ومطهر للسيارة</h4>
+                    <p>معقم للأسطح الداخلية للسيارة يقتل 99.9% من الجراثيم</p>
+                    <div class="product-price">8,000 د.ع</div>
+                    <button class="btn contact-btn">اطلب الآن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>عن Smart Garage</h4>
+                    <p>كراج سمارت هو وجهتك الأولى للعناية بسيارتك في بغداد. نحن نقدم خدمات متكاملة بجودة عالية وأسعار مناسبة، مع فريق محترف من الفنيين ذوي الخبرة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/964771234567"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#services">الخدمات</a></li>
+                        <li><a href="#products">المنتجات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col contact-section">
+                    <h4>معلومات الاتصال</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+964771234567"><i class="fas fa-phone"></i> 07700000000</a></li>
+                        <li><a href="mailto:info@smartgarage.iq"><i class="fas fa-envelope"></i> smartgarage@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> بغداد - الكرادة - مقابل كلية المنصور الجامعة</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> السبت - الخميس: 6 ص - 10 م</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> Smart Garage - كراج سمارت. تم التصميم بواسطة فريق كراج سمارت.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // تأثيرات الظهور عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // إضافة تأثير على الروابط في القائمة
+            const navLinks = document.querySelectorAll('.main-nav a');
+            const heroBtn = document.querySelector('.hero-btn');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // إزالة الفئة النشطة من جميع الروابط
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    
+                    // إضافة الفئة النشطة للرابط الحالي
+                    this.classList.add('active');
+                    
+                    // التمرير السلس للقسم المستهدف
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // تأثير التضخم عند النقر على زر استعرض خدماتنا
+            if (heroBtn) {
+                heroBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 200);
+                    
+                    const targetElement = document.querySelector('#services');
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+            
+            // إضافة تأثيرات إضافية على بطاقات الخدمات
+            const serviceCards = document.querySelectorAll('.service-card, .product-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (this.classList.contains('service-card')) {
+                        this.style.transform = 'translateY(-15px) scale(1.02)';
+                    } else {
+                        this.style.transform = 'translateY(-10px) scale(1.02)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // تحديث السنة في الفوتر
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // تحسينات إضافية للأزرار
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+
+            // إضافة وظيفة التمرير إلى قسم الاتصال عند النقر على الأزرار
+            const contactBtns = document.querySelectorAll('.contact-btn');
+            const contactSection = document.querySelector('.contact-section');
+            
+            contactBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // التمرير السلس إلى قسم الاتصال
+                    if (contactSection) {
+                        window.scrollTo({
+                            top: contactSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
